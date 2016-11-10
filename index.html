@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Number Converter</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    
+    <link rel="stylesheet" href="styles/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  
+  <body ng-app="NumberConverter">
+    <div class="app-container" ng-controller="MainCtrl">
+      <div class="main-content">
+        <h3 class="app-title text-center">Number Converter</h3>
+        
+        <div class="control-elements form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-md-1" for="decInput">Dec</label>
+            <div class="controls col-md-11">
+              <!-- <input ng-model="decVal" ng-change="decChange()" ng-keypress="decKey($event)" type="text" class="form-control" id="decInput" autofocus> -->
+              <input ng-model="decVal" ng-change="decChange()" ng-keypress="decKey($event)" decimal-value type="text" autofocus class="val-control col-md-9" id="decInput">
+              <button class="btn btn-copy col-md-2" id="decCopy" tabindex="-1">COPY</button>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="control-label col-md-1" for="hexInput">Hex</label>
+            <div class="controls col-md-11">
+              <input ng-model="hexVal" ng-change="hexChange()" ng-keypress="hexKey($event)" hexadecimal-value type="text" class="val-control col-md-9" id="hexInput">
+              <button class="btn btn-copy col-md-2" id="hexCopy" tabindex="-1">COPY</button>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="control-label col-md-1" for="binInput">Bin</label>
+            <div class="controls col-md-11">
+              <input ng-model="binVal" ng-change="binChange()" ng-keypress="binKey($event)" binary-value type="text" class="val-control col-md-9" id="binInput">
+              <button class="btn btn-copy col-md-2" id="binCopy" tabindex="-1">COPY</button>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="controls col-md-12 text-center">
+              <button class="btn btn-default btn-global" id="buttonClear">Clear</button>
+              <button class="btn btn-default btn-global" id="buttonCopyAll">Copy All</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="options">
+          <div class="form-group">
+            <input ng-model="format" ng-change="formatChange()" type="checkbox" name="format" id="chFormat">
+            <label class="control-label unselectable" for="chFormat">Format</label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- <div class="footer">
+        <div class="container">
+          <p><span class="glyphicon glyphicon-flash"></span>Number Converter</p>
+        </div>
+      </div> -->
+    </div>
+
+    <script src="scripts/vendor/jquery.js"></script>
+    <script src="scripts/vendor/angular.js"></script>
+    <script src="scripts/vendor/bootstrap.js"></script>
+    <script src="scripts/vendor/clipboard.js"></script>
+    
+    <script src="scripts/custom.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/directives/validators.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+</body>
+</html>

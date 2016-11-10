@@ -1,0 +1,3 @@
+- focus last edited input on Format click
+- Clear button
+- allowed chars validation
