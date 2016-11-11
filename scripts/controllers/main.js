@@ -2,6 +2,20 @@
 
 angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   
+  var hintNumbers = [];
+  for(var i = 0; i<16; i++){
+    var hintNum = {
+      decVal: i.toString(),
+      hexVal: i.toString(16).toUpperCase(),
+      binVal: normalizeBin(i.toString(2), 4)
+    };
+    
+    hintNumbers.push(hintNum);
+  }
+  
+  $scope.hintNumbers = hintNumbers;
+  
+  
   // ===== Decimal =====
   
   $scope.decChange = function(){
@@ -9,6 +23,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     
     decCalc();
     reformatInputs();
+    updateBitMap();
   }
   
   $scope.decKey = function($event){
@@ -101,6 +116,9 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     }
   }
   
+  
+  // ####### Handlers #######
+  
   $scope.formatChange = function(){
     console.log('formatChange()');
     
@@ -114,9 +132,29 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     
     currentInput.focus();
   }
+  
+  $scope.fullScreenChange = function(){
+    console.log('fullScreenChange()');
+  }
+  
+  $scope.clearInputs = function(){
+    console.log('clearInputs()');
+    
+    $scope.decVal = '';
+    $scope.hexVal = '';
+    $scope.binVal = '';
+  }
+
+  $scope.updateBits = function(){
+    console.log('updateBits()');
+  }
+
+  $scope.testClick = function(){
+    console.log('testClick()');
+  }
 
 
-// ----------------- Service -----------------
+// ---------------------- Service ----------------------
   
   function decCalc(){
     console.log('  decCalc()');
@@ -189,9 +227,24 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     return val;
   }
   
+  function normalizeBin(val, groupLen){
+    var lenRest = val.length % groupLen;
+    
+    if(lenRest != 0){
+      var leadZeroesNum = groupLen - lenRest + 1;
+      var leadZeroes = Array(leadZeroesNum).join('0');
+      val = leadZeroes + val;
+    }
+    
+    return val;
+  }
+  
   function reformatInputs(){
     if($scope.format){
       formatInputs();
+    }
+    else{
+      unformatInputs();
     }
   }
   
@@ -270,6 +323,89 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     if(binVal){
       binVal = clearFormat(binVal);
       $scope.binVal = binVal;
+    }
+  }
+  
+  function updateBitMap(){
+    console.log('  updateBitMap()');
+    
+    var binVal = clearFormat($scope.binVal);
+    binVal = normalizeBin(binVal, 8);
+    var bitLen = binVal.length;
+    
+    // console.log('-- binVal: ' + binVal + ' (' + bitLen + ')');
+    if(bitLen % 8 != 0) return;
+    
+    var bytes = $("#bytes");
+    bytes.empty();
+    
+    var bytesLen = bitLen / 8;
+    var closeWord = false;
+    var word;
+    
+    for(var i=0; i<bytesLen; ++i){
+      var startId = i * 8;
+      var endId = startId + 7;
+      
+      var highBitNum = bitLen - startId - 1;
+      var lowBitNum = bitLen - endId - 1;
+      var byteId = bytesLen - i;
+      
+      var byteWrap = $("<div>").addClass("byte-wrap");
+      var byteInfo = $("<div>").addClass("byte-info");
+      var byte = $("<div>").addClass("byte");
+      
+      var highHalfByte = $("<div>").addClass("high-half-byte");
+      var lowHalfByte = $("<div>").addClass("low-half-byte");
+      
+      var byteHighBitNum = $("<div>").addClass("high-bit-num").text(highBitNum);
+      var byteLowBitNum = $("<div>").addClass("low-bit-num").text(lowBitNum);
+      var byteNumText = $("<div>").addClass("byte-num").text('byte ' + byteId);
+      
+      byteInfo.append(byteHighBitNum);
+      byteInfo.append(byteNumText);
+      byteInfo.append(byteLowBitNum);
+      
+      
+      for(var j=0; j<8; ++j){
+        var bitVal = binVal[startId + j];
+
+        var bit = $("<span>");
+        bit.addClass("bit unselectable");
+        bit.text(bitVal);
+        bit.click(function(){updateBits(this);});
+        
+        if(j < 4)
+          highHalfByte.append(bit);
+        else
+          lowHalfByte.append(bit);
+      }
+      
+      byte.append(highHalfByte);
+      byte.append(lowHalfByte);
+      
+      byteWrap.append(byteInfo);
+      byteWrap.append(byte);
+      // bytes.append(byteWrap);        // to disable bytes grouping in words uncomment the line and comment the block below
+      
+      if(!closeWord){
+        word = $("<div>").addClass("word");
+        byte.addClass("high-byte");
+        word.append(byteWrap);
+        
+        closeWord = true;
+      }
+      else{
+        byte.addClass("low-byte");
+        word.append(byteWrap);
+        bytes.append(word);
+        
+        closeWord = false;
+      }
+      
+      if(closeWord && i == bytesLen-1){
+        bytes.append(word);
+      }
     }
   }
 

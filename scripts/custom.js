@@ -1,6 +1,28 @@
 
 var currentInput;
 
+function updateBits(bitEl){
+  console.log('Global :: updateBits()');
+  
+  var currentBit = bitEl.innerText;
+  if(currentBit == '0')
+    currentBit = '1';
+  else
+    currentBit = '0';
+  bitEl.innerText = currentBit;
+  
+  // $(".bit")[0].innerText = '1';
+  
+  var binVal = '';
+  var bits = $(".bit");
+  bits.each(function(id, el){
+    binVal += el.innerText;
+  });
+  
+  $("#binInput").val(binVal);
+  $("#binInput").change();
+}
+
 $(function(){
   
   currentInput = $("#decInput");
