@@ -108,12 +108,6 @@ body {
   padding-right: 0;
 }
 
-.options {
-  margin-top: 20px;
-  padding-top: 10px;
-  border-top: 1px solid #e5e5e5;
-}
-
 .unselectable{
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -202,7 +196,6 @@ body {
 }
 
 #numbers-hint tr{
-  
 }
 
 #numbers-hint .header{
@@ -219,6 +212,12 @@ body {
   background: #8cc9da;
 }
 
+.options {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #e5e5e5;
+  text-align: center;
+}
 .options .option{
   display: inline-block;
   margin-right: 10px;

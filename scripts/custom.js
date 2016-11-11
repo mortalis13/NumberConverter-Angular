@@ -1,5 +1,8 @@
 
 var currentInput;
+var appContainerWidth;
+var gFullScreen = false;
+
 
 function updateBits(bitEl){
   console.log('Global :: updateBits()');
@@ -23,8 +26,25 @@ function updateBits(bitEl){
   $("#binInput").change();
 }
 
+function setFullScreen(fullScreen) {
+  gFullScreen = fullScreen;
+  
+  if(fullScreen){
+    $(".left-side").hide();
+    $(".app-container").css('width', '90%');
+    $("#bytes .word").css('display', 'inline-block');
+  }
+  else{
+    $(".left-side").show();
+    $(".app-container").css('width', appContainerWidth);
+    $("#bytes .word").css('display', 'block');
+  }
+}
+
+
 $(function(){
   
+  appContainerWidth = $(".app-container").css('width');
   currentInput = $("#decInput");
   
   $("#decInput").focus(function(){

@@ -135,6 +135,11 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   
   $scope.fullScreenChange = function(){
     console.log('fullScreenChange()');
+    
+    var fullScreen = $scope.fullScreen;
+    setFullScreen(fullScreen);
+    
+    currentInput.focus();
   }
   
   $scope.clearInputs = function(){
@@ -390,6 +395,10 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
       
       if(!closeWord){
         word = $("<div>").addClass("word");
+        if(gFullScreen){
+          word.css('display', 'inline-block');
+        }
+        
         byte.addClass("high-byte");
         word.append(byteWrap);
         
