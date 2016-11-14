@@ -30,61 +30,67 @@ function setFullScreen(fullScreen) {
   gFullScreen = fullScreen;
   
   if(fullScreen){
+    appContainerWidth = $(".app-container").width();
+    
     $(".left-side").hide();
     $(".right-side").hide();
+    
     $(".app-container").css('width', '90%');
     $("#bytes .word").css('display', 'inline-block');
     
-    $(".control-elements .control-label").css({
-      'width': '80px',
-      'text-align': 'right'
-    });
-    $(".control-elements .btn-copy").css({
-      'width': '70px',
-    });
-    
-    var valWidth =  $(".val-controls .controls").width() - $(".control-elements .btn-copy").outerWidth(true);
-    $(".control-elements .val-control").css({
+    var valWidth =  $(".val-form").width() - $(".val-form .btn-copy").outerWidth(true) - $(".val-form .control-label").outerWidth(true);
+    $(".val-form .val-control").css({
       'width': valWidth
     });
   }
   else{
-    $(".left-side").show();
-    $(".right-side").show();
+    var winWidth = $(window).width();
+    if(winWidth > 992){
+      $(".left-side").show();
+    }
+    if(winWidth > 1300){
+      $(".right-side").show();
+    }
+    
     $(".app-container").css('width', appContainerWidth);
     $("#bytes .word").css('display', 'block');
     
-    $(".control-elements .control-label").css({
-      'width': '',
-      'text-align': ''
-    });
-    $(".control-elements .btn-copy").css({
-      'width': '',
-    });
-    $(".control-elements .val-control").css({
+    $(".val-form .val-control").css({
       'width': ''
     });
   }
 }
 
+function calcSidebarDistance() {
+  var sideDist = 80;
+  var leftVal = $(".app-container").offset().left - $(".left-side").width() - sideDist;
+  $(".left-side").css('left', leftVal);
+  
+  leftVal = $(".app-container").offset().left + $(".app-container").width() + sideDist;
+  $(".right-side").css('left', leftVal);
+}
+
 
 $(function(){
   
-  appContainerWidth = $(".app-container").css('width');
+  $(window).resize(function(){
+    calcSidebarDistance();
+  });
+  
+  appContainerWidth = $(".app-container").width();
   currentInput = $("#decInput");
+  
+  calcSidebarDistance();
   
   $("#decInput").focus(function(){
     currentInput = $(this);
   });
-  
   $("#hexInput").focus(function(){
     currentInput = $(this);
   });
-  
   $("#binInput").focus(function(){
     currentInput = $(this);
   });
-  
   
   $("#decCopy").click(function(){
     var val = $("#decInput").val();

@@ -12,27 +12,24 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     
     hintNumbers.push(hintNum);
   }
-  
   $scope.hintNumbers = hintNumbers;
-  
   
   var powerHintNumbers = [];
   for(var i = 0; i<16; i++){
     var powerExpr = '2<sup>' + i.toString() + '</sup>';
-    var powerVal = Math.pow(2, i);
-    var powerHexVal = powerVal.toString(16).toUpperCase();
-    var powerBinVal = formatBin(powerVal.toString(2), 4);
+    var powerDecVal = Math.pow(2, i);
+    var powerHexVal = powerDecVal.toString(16).toUpperCase();
+    var powerBinVal = formatBin(powerDecVal.toString(2), 4);
     
     var hintNum = {
       powerExpr: powerExpr,
-      powerVal: powerVal,
+      powerDecVal: powerDecVal,
       powerHexVal: powerHexVal,
       powerBinVal: powerBinVal
     };
     
     powerHintNumbers.push(hintNum);
   }
-  
   $scope.powerHintNumbers = powerHintNumbers;
   
   
@@ -176,7 +173,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   
   $scope.fillPower = function($index){
     console.log('fillPower(' + $index + ')');
-    $scope.decVal = $(".power-val-col")[$index].innerText;
+    $scope.decVal = $(".power-dec-col")[$index].innerText;
     $scope.decChange();
   }
 
