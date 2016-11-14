@@ -33,11 +33,36 @@ function setFullScreen(fullScreen) {
     $(".left-side").hide();
     $(".app-container").css('width', '90%');
     $("#bytes .word").css('display', 'inline-block');
+    
+    
+    $(".control-elements .control-label").css({
+      'width': '80px',
+      'text-align': 'right'
+    });
+    $(".control-elements .btn-copy").css({
+      'width': '70px',
+    });
+    
+    var valWidth =  $(".val-controls .controls").width() - $(".control-elements .btn-copy").outerWidth(true);
+    $(".control-elements .val-control").css({
+      'width': valWidth
+    });
   }
   else{
     $(".left-side").show();
     $(".app-container").css('width', appContainerWidth);
     $("#bytes .word").css('display', 'block');
+    
+    $(".control-elements .control-label").css({
+      'width': '',
+      'text-align': ''
+    });
+    $(".control-elements .btn-copy").css({
+      'width': '',
+    });
+    $(".control-elements .val-control").css({
+      'width': ''
+    });
   }
 }
 

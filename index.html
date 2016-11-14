@@ -31,13 +31,19 @@
       <div class="main-content">
         <h3 class="app-title text-center">Number Converter</h3>
         
-        <div class="control-elements form-horizontal">
+        <div class="val-controls control-elements form-horizontal">
           <div class="form-group">
             <label class="control-label col-md-1" for="decInput">Dec</label>
             <div class="controls col-md-11">
-              <!-- <input ng-model="decVal" ng-change="decChange()" ng-keypress="decKey($event)" type="text" class="form-control" id="decInput" autofocus> -->
               <input ng-model="decVal" ng-change="decChange()" ng-keypress="decKey($event)" decimal-value type="text" autofocus class="val-control col-md-9" id="decInput">
               <button class="btn btn-copy col-md-2" id="decCopy" tabindex="-1">COPY</button>
+              
+              <!-- <div class="col-md-9">
+                <input ng-model="decVal" ng-change="decChange()" ng-keypress="decKey($event)" decimal-value type="text" autofocus class="val-control" id="decInput">
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-copy" id="decCopy" tabindex="-1">COPY</button>
+              </div> -->
             </div>
           </div>
           
