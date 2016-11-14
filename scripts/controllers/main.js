@@ -7,7 +7,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     var hintNum = {
       decVal: i.toString(),
       hexVal: i.toString(16).toUpperCase(),
-      binVal: normalizeBin(i.toString(2), 4)
+      binVal: normalizeValue(i.toString(2), 4)
     };
     
     hintNumbers.push(hintNum);
@@ -19,7 +19,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     var powerExpr = '2<sup>' + i.toString() + '</sup>';
     var powerDecVal = Math.pow(2, i);
     var powerHexVal = powerDecVal.toString(16).toUpperCase();
-    var powerBinVal = formatBin(powerDecVal.toString(2), 4);
+    var powerBinVal = formatValue(powerDecVal.toString(2), 4);
     
     var hintNum = {
       powerExpr: powerExpr,
@@ -73,6 +73,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     
     hexCalc();
     reformatInputs();
+    updateBitMap();
   }
   
   $scope.hexKey = function($event){
@@ -107,6 +108,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     
     binCalc();
     reformatInputs();
+    updateBitMap();
   }
   
   $scope.binKey = function($event){
@@ -165,14 +167,13 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     $scope.decVal = '';
     $scope.hexVal = '';
     $scope.binVal = '';
+    
+    $("#bytes").empty();
   }
 
-  $scope.updateBits = function(){
-    console.log('updateBits()');
-  }
-  
-  $scope.fillPower = function($index){
-    console.log('fillPower(' + $index + ')');
+  $scope.fillPowerField = function($index){
+    console.log('fillPowerField(' + $index + ')');
+    
     $scope.decVal = $(".power-dec-col")[$index].innerText;
     $scope.decChange();
   }
@@ -247,43 +248,6 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   
   // ===== Formatting =====
   
-  function clearFormat(val){
-    if(!val || val === '0') return val;
-
-    val = val.replace(/ +/g, '');
-    val = val.replace(/^0+/g, '');
-    
-    return val;
-  }
-  
-  function normalizeBin(val, groupLen){
-    var lenRest = val.length % groupLen;
-    
-    if(lenRest != 0){
-      var leadZeroesNum = groupLen - lenRest + 1;
-      var leadZeroes = Array(leadZeroesNum).join('0');
-      val = leadZeroes + val;
-    }
-    
-    return val;
-  }
-  
-  function formatBin(val, groupLen){
-    val = normalizeBin(val, groupLen);
-    var resBinVal = ''
-    
-    if(val.length > 0){
-      for(var id in val){
-        var ch = val[id];
-        if(id != 0 && id % groupLen == 0)
-          ch = ' ' + ch;
-        resBinVal += ch;
-      }
-    }
-    
-    return resBinVal;
-  }
-  
   function reformatInputs(){
     if($scope.format){
       formatInputs();
@@ -301,24 +265,10 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     if(hexVal){
       var groupLen = 2;
       hexVal = clearFormat(hexVal);
+      hexVal = formatValue(hexVal, groupLen);
       
-      if(hexVal.length % groupLen != 0){
-        hexVal = '0' + hexVal;
-      }
-      
-      var resHexVal = '';
-      
-      if(hexVal.length > 0){
-        for(var id in hexVal){
-          var ch = hexVal[id];
-          if(id != 0 && id % groupLen == 0)
-            ch = ' ' + ch;
-          resHexVal += ch;
-        }
-      }
-      
-      if(resHexVal){
-        $scope.hexVal = resHexVal;
+      if(hexVal){
+        $scope.hexVal = hexVal;
       }
     }
     
@@ -327,28 +277,10 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     if(binVal){
       var groupLen = 4;
       binVal = clearFormat(binVal);
+      binVal = formatValue(binVal, groupLen);
       
-      var lenRest = binVal.length % groupLen;
-      
-      if(lenRest != 0){
-        var leadZeroesNum = groupLen - lenRest + 1;
-        var leadZeroes = Array(leadZeroesNum).join('0');
-        binVal = leadZeroes + binVal;
-      }
-      
-      var resBinVal = '';
-      
-      if(binVal.length > 0){
-        for(var id in binVal){
-          var ch = binVal[id];
-          if(id != 0 && id % groupLen == 0)
-            ch = ' ' + ch;
-          resBinVal += ch;
-        }
-      }
-      
-      if(resBinVal){
-        $scope.binVal = resBinVal;
+      if(binVal){
+        $scope.binVal = binVal;
       }
     }
   }
@@ -375,7 +307,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     console.log('  updateBitMap()');
     
     var binVal = clearFormat($scope.binVal);
-    binVal = normalizeBin(binVal, 8);
+    binVal = normalizeValue(binVal, 8);
     var bitLen = binVal.length;
     
     // console.log('-- binVal: ' + binVal + ' (' + bitLen + ')');

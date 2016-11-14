@@ -22,7 +22,6 @@ app.directive('decimalValue', function() {
 
         return false;
       };
-      
     }
   };
 });

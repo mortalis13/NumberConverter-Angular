@@ -97,7 +97,7 @@
               <td class="col bin-header">Bin</td>
             </tr>
             
-            <tr class="row num-value" ng-repeat="hintNum in powerHintNumbers" ng-click="fillPower($index)">
+            <tr class="row num-value" ng-repeat="hintNum in powerHintNumbers" ng-click="fillPowerField($index)">
               <td class="col power-col" ng-bind-html="hintNum.powerExpr"></td>
               <td class="col power-dec-col" ng-bind="hintNum.powerDecVal"></td>
               <td class="col power-hex-col" ng-bind="hintNum.powerHexVal"></td>
