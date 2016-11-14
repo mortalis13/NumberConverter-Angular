@@ -16,6 +16,26 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   $scope.hintNumbers = hintNumbers;
   
   
+  var powerHintNumbers = [];
+  for(var i = 0; i<16; i++){
+    var powerExpr = '2<sup>' + i.toString() + '</sup>';
+    var powerVal = Math.pow(2, i);
+    var powerHexVal = powerVal.toString(16).toUpperCase();
+    var powerBinVal = formatBin(powerVal.toString(2), 4);
+    
+    var hintNum = {
+      powerExpr: powerExpr,
+      powerVal: powerVal,
+      powerHexVal: powerHexVal,
+      powerBinVal: powerBinVal
+    };
+    
+    powerHintNumbers.push(hintNum);
+  }
+  
+  $scope.powerHintNumbers = powerHintNumbers;
+  
+  
   // ===== Decimal =====
   
   $scope.decChange = function(){
@@ -153,9 +173,16 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   $scope.updateBits = function(){
     console.log('updateBits()');
   }
+  
+  $scope.fillPower = function($index){
+    console.log('fillPower(' + $index + ')');
+    $scope.decVal = $(".power-val-col")[$index].innerText;
+    $scope.decChange();
+  }
 
   $scope.testClick = function(){
     console.log('testClick()');
+    $scope.decVal = '123';
   }
 
 
@@ -242,6 +269,22 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     }
     
     return val;
+  }
+  
+  function formatBin(val, groupLen){
+    val = normalizeBin(val, groupLen);
+    var resBinVal = ''
+    
+    if(val.length > 0){
+      for(var id in val){
+        var ch = val[id];
+        if(id != 0 && id % groupLen == 0)
+          ch = ' ' + ch;
+        resBinVal += ch;
+      }
+    }
+    
+    return resBinVal;
   }
   
   function reformatInputs(){

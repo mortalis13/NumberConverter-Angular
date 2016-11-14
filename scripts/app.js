@@ -1,4 +1,4 @@
 'use strict';
 
-var app = angular.module('NumberConverter', []);
+var app = angular.module('NumberConverter', ['ngSanitize']);
 

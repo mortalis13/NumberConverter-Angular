@@ -184,24 +184,41 @@ body {
   left: 15%;
   top: 76px;
 }
+.right-side{
+  position: absolute;
+  right: 6%;
+  top: 76px;
+}
 
-#numbers-hint{
+#numbers-hint,
+#powers-hint{
   text-align: center;
   border-collapse: collapse;
 }
-
-#numbers-hint td{
+#numbers-hint td,
+#powers-hint td{
   border: 1px solid #aaa;
   padding: 4px 10px;
 }
-
-#numbers-hint tr{
+#powers-hint tr.row.num-value{
+  cursor: pointer;
 }
-
-#numbers-hint .header{
+#powers-hint tr.row.num-value:hover{
+  background: #f9f9f9;
+}
+#powers-hint td{
+  text-align: left;
+}
+#powers-hint td.power-hex-col,
+#powers-hint td.power-bin-col{
+  text-align: right;
+}
+#numbers-hint .header td,
+#powers-hint .header td{
   font-weight: 700;
+  border-bottom: 2px solid #777;
+  text-align: center;
 }
-
 #numbers-hint .dec-header{
   background: #f6ee5f;
 }

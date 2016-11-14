@@ -31,9 +31,9 @@ function setFullScreen(fullScreen) {
   
   if(fullScreen){
     $(".left-side").hide();
+    $(".right-side").hide();
     $(".app-container").css('width', '90%');
     $("#bytes .word").css('display', 'inline-block');
-    
     
     $(".control-elements .control-label").css({
       'width': '80px',
@@ -50,6 +50,7 @@ function setFullScreen(fullScreen) {
   }
   else{
     $(".left-side").show();
+    $(".right-side").show();
     $(".app-container").css('width', appContainerWidth);
     $("#bytes .word").css('display', 'block');
     
