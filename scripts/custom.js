@@ -6,14 +6,8 @@ var gFullScreen = false;
 
 $(function(){
   
-  $(window).resize(function(){
-    calcSidebarDistance();
-  });
-  
   appContainerWidth = $(".app-container").width();
   currentInput = $("#decInput");
-  
-  calcSidebarDistance();
   
   $("#decInput").focus(function(){
     currentInput = $(this);
@@ -101,6 +95,7 @@ function setFullScreen(fullScreen) {
     $(".right-side").hide();
     
     $(".app-container").css('width', '90%');
+    $(".main-content").css('width', '100%');
     $("#bytes .word").css('display', 'inline-block');
     
     var valWidth =  $(".val-form").width() - $(".val-form .btn-copy").outerWidth(true) - $(".val-form .control-label").outerWidth(true);
@@ -113,12 +108,13 @@ function setFullScreen(fullScreen) {
     if(winWidth > 992){
       $(".left-side").show();
     }
-    if(winWidth > 1300){
+    if(winWidth > 850){
       $(".right-side").show();
     }
     
     // $(".app-container").css('width', appContainerWidth);
     $(".app-container").css('width', '');
+    $(".main-content").css('width', '');
     $("#bytes .word").css('display', '');
     
     $(".val-form .val-control").css({

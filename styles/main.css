@@ -18,13 +18,17 @@ body {
 /* ----- Container -----*/
 
 .app-container{
-  width: 450px;
   margin: 0 auto;
+  text-align: center;
 }
 .app-title{
   font-weight: 700;
   margin-bottom: 30px;
   text-decoration: underline;
+}
+.main-content {
+  display: inline-block;
+  vertical-align: top;
 }
 
 
@@ -34,7 +38,10 @@ body {
   width: 60px;
   text-align: left;
 }
-
+.val-form .form-group {
+  margin-right: 0;
+  margin-left: 0;
+}
 .val-form .val-control{
   width: 305px;
   height: 34px;
@@ -206,19 +213,20 @@ body {
 /* ----- Sidebars ----- */
 
 .left-side{
-  position: absolute;
-  left: 15%;
-  top: 76px;
+  display: inline-block;
+  width: 33%;
+  margin-top: 76px;
 }
 .right-side{
-  position: absolute;
-  right: 0;
-  top: 76px;
+  display: inline-block;
+  width: 33%;
+  margin-top: 76px;
 }
 
 #numbers-hint,
 #powers-hint{
   text-align: center;
+  margin: 0 auto;
   border-collapse: collapse;
 }
 #numbers-hint td,

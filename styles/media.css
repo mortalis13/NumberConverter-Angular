@@ -1,13 +1,31 @@
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1350px) {
+  .left-side,
   .right-side{
-    display: none;
+    width: auto;
+  }
+  .right-side{
+    margin-left: 20px;
+  }
+  .main-content {
+    float: left;
+    margin-left: 20px;
   }
 }
 
 @media screen and (max-width: 992px) {
   .left-side{
     display: none;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .right-side{
+    display: none;
+  }
+  .main-content {
+    float: none;
+    margin-left: 0;
   }
 }
 
@@ -19,7 +37,10 @@
 
 @media screen and (max-width: 500px) {
   .app-container{
-    width: 80%;
+    width: 90%;
+  }
+  .main-content {
+    width: 100%;
   }
   .val-form .control-label {
     display: block;

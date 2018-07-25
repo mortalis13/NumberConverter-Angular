@@ -14,6 +14,23 @@
   <body ng-app="NumberConverter">
     <div class="global-container" ng-controller="MainCtrl">
       <div class="app-container">
+        
+        <div class="left-side">
+          <table id="numbers-hint">
+            <tr class="row header">
+              <td class="col dec-header">Dec</td>
+              <td class="col hex-header">Hex</td>
+              <td class="col bin-header">Bin</td>
+            </tr>
+            
+            <tr class="row num-value" ng-repeat="hintNum in hintNumbers">
+              <td class="col dec-col" ng-bind="hintNum.decVal"></td>
+              <td class="col hex-col" ng-bind="hintNum.hexVal"></td>
+              <td class="col bin-col" ng-bind="hintNum.binVal"></td>
+            </tr>
+          </table>
+        </div>
+        
         <div class="main-content">
           <h3 class="app-title text-center">Number Converter</h3>
           
@@ -63,29 +80,6 @@
             <div id="bytes">
             </div>
           </div>
-        </div>
-        <!-- main-content -->
-        
-        <!-- <div class="footer">
-          <div class="container">
-            <p><span class="glyphicon glyphicon-flash"></span>Number Converter</p>
-          </div>
-        </div> -->
-        
-        <div class="left-side">
-          <table id="numbers-hint">
-            <tr class="row header">
-              <td class="col dec-header">Dec</td>
-              <td class="col hex-header">Hex</td>
-              <td class="col bin-header">Bin</td>
-            </tr>
-            
-            <tr class="row num-value" ng-repeat="hintNum in hintNumbers">
-              <td class="col dec-col" ng-bind="hintNum.decVal"></td>
-              <td class="col hex-col" ng-bind="hintNum.hexVal"></td>
-              <td class="col bin-col" ng-bind="hintNum.binVal"></td>
-            </tr>
-          </table>
         </div>
         
         <div class="right-side">
