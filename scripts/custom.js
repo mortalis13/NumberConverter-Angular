@@ -4,43 +4,43 @@ var appContainerWidth;
 var gFullScreen = false;
 
 
-$(function(){
+$(function() {
   
   appContainerWidth = $(".app-container").width();
   currentInput = $("#decInput");
   
-  $("#decInput").focus(function(){
+  $("#decInput").focus(function() {
     currentInput = $(this);
   });
-  $("#hexInput").focus(function(){
+  $("#hexInput").focus(function() {
     currentInput = $(this);
   });
-  $("#binInput").focus(function(){
+  $("#binInput").focus(function() {
     currentInput = $(this);
   });
   
-  $("#decCopy").click(function(){
+  $("#decCopy").click(function() {
     var val = $("#decInput").val();
-    if(val){
+    if (val) {
       clipboard.copy(val);
     }
   });
   
-  $("#hexCopy").click(function(){
+  $("#hexCopy").click(function() {
     var val = $("#hexInput").val();
-    if(val){
+    if (val) {
       clipboard.copy(val);
     }
   });
   
-  $("#binCopy").click(function(){
+  $("#binCopy").click(function() {
     var val = $("#binInput").val();
-    if(val){
+    if (val) {
       clipboard.copy(val);
     }
   });
   
-  $("#buttonClear").click(function(){
+  $("#buttonClear").click(function() {
     $("#decInput").val('');
     $("#hexInput").val('');
     $("#binInput").val('');
@@ -48,14 +48,14 @@ $(function(){
     $("#decInput").focus();
   });
   
-  $("#buttonCopyAll").click(function(){
+  $("#buttonCopyAll").click(function() {
     var val = '';
     
     val += $("#decInput").val() + '\n';
     val += $("#hexInput").val() + '\n';
     val += $("#binInput").val();
     
-    if(val.trim()){
+    if (val.trim()) {
       clipboard.copy(val);
     }
     
@@ -65,11 +65,11 @@ $(function(){
 });
 
 
-function updateBits(bitEl){
+function updateBits(bitEl) {
   console.log('Global :: updateBits()');
   
   var currentBit = bitEl.innerText;
-  if(currentBit == '0')
+  if (currentBit == '0')
     currentBit = '1';
   else
     currentBit = '0';
@@ -77,7 +77,7 @@ function updateBits(bitEl){
   
   var binVal = '';
   var bits = $(".bit");
-  bits.each(function(id, el){
+  bits.each(function(id, el) {
     binVal += el.innerText;
   });
   
@@ -88,7 +88,7 @@ function updateBits(bitEl){
 function setFullScreen(fullScreen) {
   gFullScreen = fullScreen;
   
-  if(fullScreen){
+  if (fullScreen) {
     // appContainerWidth = $(".app-container").width();
     
     $(".left-side").hide();
@@ -99,16 +99,16 @@ function setFullScreen(fullScreen) {
     $("#bytes .word").css('display', 'inline-block');
     
     var valWidth =  $(".val-form").width() - $(".val-form .btn-copy").outerWidth(true) - $(".val-form .control-label").outerWidth(true);
-    $(".val-form .val-control").css({
+    $(".val-form .val-control").css( {
       'width': valWidth
     });
   }
-  else{
+  else {
     var winWidth = $(window).width();
-    if(winWidth > 992){
+    if (winWidth > 992) {
       $(".left-side").show();
     }
-    if(winWidth > 850){
+    if (winWidth > 850) {
       $(".right-side").show();
     }
     
@@ -117,7 +117,7 @@ function setFullScreen(fullScreen) {
     $(".main-content").css('width', '');
     $("#bytes .word").css('display', '');
     
-    $(".val-form .val-control").css({
+    $(".val-form .val-control").css( {
       'width': ''
     });
   }
@@ -133,8 +133,8 @@ function calcSidebarDistance() {
 }
 
 
-function clearFormat(val){
-  if(!val || val === '0') return val;
+function clearFormat(val) {
+  if (!val || val === '0') return val;
 
   val = val.replace(/ +/g, '');
   val = val.replace(/^0+/g, '');
@@ -142,10 +142,10 @@ function clearFormat(val){
   return val;
 }
 
-function normalizeValue(val, groupLen){
+function normalizeValue(val, groupLen) {
   var lenRest = val.length % groupLen;
   
-  if(lenRest != 0){
+  if (lenRest != 0) {
     var leadZeroesNum = groupLen - lenRest + 1;
     var leadZeroes = Array(leadZeroesNum).join('0');
     val = leadZeroes + val;
@@ -154,14 +154,14 @@ function normalizeValue(val, groupLen){
   return val;
 }
 
-function formatValue(val, groupLen){
+function formatValue(val, groupLen) {
   val = normalizeValue(val, groupLen);
   var resVal = ''
   
-  if(val.length > 0){
-    for(var id in val){
+  if (val.length > 0) {
+    for (var id in val) {
       var ch = val[id];
-      if(id != 0 && id % groupLen == 0)
+      if (id != 0 && id % groupLen == 0)
         ch = ' ' + ch;
       resVal += ch;
     }

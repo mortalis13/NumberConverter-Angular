@@ -2,8 +2,11 @@
 
 angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   
+  var hintCount = 16;
+  var hintRows = 16;
+  
   var hintNumbers = [];
-  for(var i = 0; i<16; i++){
+  for (var i = 0; i<hintCount; i++) {
     var hintNum = {
       decVal: i.toString(),
       hexVal: i.toString(16).toUpperCase(),
@@ -15,7 +18,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   $scope.hintNumbers = hintNumbers;
   
   var powerHintNumbers = [];
-  for(var i = 0; i<16; i++){
+  for (var i = 0; i<16; i++) {
     var powerExpr = '2<sup>' + i.toString() + '</sup>';
     var powerDecVal = Math.pow(2, i);
     var powerHexVal = powerDecVal.toString(16).toUpperCase();
@@ -35,7 +38,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   
   // ===== Decimal =====
   
-  $scope.decChange = function(){
+  $scope.decChange = function() {
     console.log('decChange()');
     
     decCalc();
@@ -43,20 +46,20 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     updateBitMap();
   }
   
-  $scope.decKey = function($event){
+  $scope.decKey = function($event) {
     var key = $event.originalEvent.keyCode;
     
-    if(key == 38 || key == 40){
+    if (key == 38 || key == 40) {
       console.log('decKey()');
       
       var decVal = parseInt($scope.decVal);
-      if(!decVal) decVal = 0;
+      if (!decVal) decVal = 0;
       var newVal = decVal;
       
-      if(key == 38){
+      if (key == 38) {
         newVal = decVal + 1;
       }
-      else if(key == 40){
+      else if (key == 40) {
         newVal = decVal - 1;
       }
       
@@ -68,7 +71,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   
   // ===== Hexadecimal =====
   
-  $scope.hexChange = function(){
+  $scope.hexChange = function() {
     console.log('hexChange()');
     
     hexCalc();
@@ -76,22 +79,22 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     updateBitMap();
   }
   
-  $scope.hexKey = function($event){
+  $scope.hexKey = function($event) {
     var key = $event.originalEvent.keyCode;
     
-    if(key == 38 || key == 40){
+    if (key == 38 || key == 40) {
       console.log('hexKey()');
       
       var hexVal = clearFormat($scope.hexVal);
       hexVal = parseInt(hexVal, 16);
       
-      if(!hexVal) hexVal = 0;
+      if (!hexVal) hexVal = 0;
       var newVal = hexVal;
       
-      if(key == 38){
+      if (key == 38) {
         newVal = hexVal + 1;
       }
-      else if(key == 40){
+      else if (key == 40) {
         newVal = hexVal - 1;
       }
       
@@ -103,7 +106,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   
   // ===== Binary =====
   
-  $scope.binChange = function(){
+  $scope.binChange = function() {
     console.log('binChange()');
     
     binCalc();
@@ -111,22 +114,22 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     updateBitMap();
   }
   
-  $scope.binKey = function($event){
+  $scope.binKey = function($event) {
     var key = $event.originalEvent.keyCode;
     
-    if(key == 38 || key == 40){
+    if (key == 38 || key == 40) {
       console.log('binKey()');
       
       var binVal = clearFormat($scope.binVal);
       binVal = parseInt(binVal, 2);
       
-      if(!binVal) binVal = 0;
+      if (!binVal) binVal = 0;
       var newVal = binVal;
       
-      if(key == 38){
+      if (key == 38) {
         newVal = binVal + 1;
       }
-      else if(key == 40){
+      else if (key == 40) {
         newVal = binVal - 1;
       }
       
@@ -138,21 +141,21 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   
   // ####### Handlers #######
   
-  $scope.formatChange = function(){
+  $scope.formatChange = function() {
     console.log('formatChange()');
     
     var format = $scope.format;
-    if(format){
+    if (format) {
       formatInputs();
     }
-    else{
+    else {
       unformatInputs();
     }
     
     currentInput.focus();
   }
   
-  $scope.fullScreenChange = function(){
+  $scope.fullScreenChange = function() {
     console.log('fullScreenChange()');
     
     var fullScreen = $scope.fullScreen;
@@ -161,7 +164,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     currentInput.focus();
   }
   
-  $scope.clearInputs = function(){
+  $scope.clearInputs = function() {
     console.log('clearInputs()');
     
     $scope.decVal = '';
@@ -171,14 +174,14 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     $("#bytes").empty();
   }
 
-  $scope.fillPowerField = function($index){
+  $scope.fillPowerField = function($index) {
     console.log('fillPowerField(' + $index + ')');
     
     $scope.decVal = $(".power-dec-col")[$index].innerText;
     $scope.decChange();
   }
 
-  $scope.testClick = function(){
+  $scope.testClick = function() {
     console.log('testClick()');
     $scope.decVal = '123';
   }
@@ -186,12 +189,12 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
 
 // ---------------------- Service ----------------------
   
-  function decCalc(){
+  function decCalc() {
     console.log('  decCalc()');
     
     var decVal = parseInt($scope.decVal);
     
-    if(decVal || decVal === 0){
+    if (decVal || decVal === 0) {
       var hexVal = decVal.toString(16);
       hexVal = hexVal.toUpperCase();
       $scope.hexVal = hexVal;
@@ -199,39 +202,39 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
       var binVal = decVal.toString(2);
       $scope.binVal = binVal;
     }
-    else{
+    else {
       $scope.hexVal = '';
       $scope.binVal = '';
     }
   }
   
-  function hexCalc(){
+  function hexCalc() {
     console.log('  hexCalc()');
     
     $scope.hexVal = $scope.hexVal.toUpperCase();
     var hexVal = clearFormat($scope.hexVal);
     hexVal = parseInt(hexVal, 16);
     
-    if(hexVal || hexVal === 0){
+    if (hexVal || hexVal === 0) {
       var decVal = hexVal.toString(10);
       $scope.decVal = decVal;
       
       var binVal = hexVal.toString(2);
       $scope.binVal = binVal;
     }
-    else{
+    else {
       $scope.decVal = '';
       $scope.binVal = '';
     }
   }
   
-  function binCalc(){
+  function binCalc() {
     console.log('  binCalc()');
     
     var binVal = clearFormat($scope.binVal);
     binVal = parseInt(binVal, 2);
     
-    if(binVal || binVal === 0){
+    if (binVal || binVal === 0) {
       var decVal = binVal.toString(10);
       $scope.decVal = decVal;
       
@@ -239,7 +242,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
       hexVal = hexVal.toUpperCase();
       $scope.hexVal = hexVal;
     }
-    else{
+    else {
       $scope.decVal = '';
       $scope.hexVal = '';
     }
@@ -248,62 +251,62 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
   
   // ===== Formatting =====
   
-  function reformatInputs(){
-    if($scope.format){
+  function reformatInputs() {
+    if ($scope.format) {
       formatInputs();
     }
-    else{
+    else {
       unformatInputs();
     }
   }
   
-  function formatInputs(){
+  function formatInputs() {
     console.log('  formatInputs()');
     
     var hexVal = $scope.hexVal;
     
-    if(hexVal){
+    if (hexVal) {
       var groupLen = 2;
       hexVal = clearFormat(hexVal);
       hexVal = formatValue(hexVal, groupLen);
       
-      if(hexVal){
+      if (hexVal) {
         $scope.hexVal = hexVal;
       }
     }
     
     var binVal = $scope.binVal;
     
-    if(binVal){
+    if (binVal) {
       var groupLen = 4;
       binVal = clearFormat(binVal);
       binVal = formatValue(binVal, groupLen);
       
-      if(binVal){
+      if (binVal) {
         $scope.binVal = binVal;
       }
     }
   }
 
-  function unformatInputs(){
+  function unformatInputs() {
     console.log('  unformatInputs()');
     
     var hexVal = $scope.hexVal;
     
-    if(hexVal){
+    if (hexVal) {
       hexVal = clearFormat(hexVal);
       $scope.hexVal = hexVal;
     }
     
     var binVal = $scope.binVal;
     
-    if(binVal){
+    if (binVal) {
       binVal = clearFormat(binVal);
       $scope.binVal = binVal;
     }
   }
   
-  function updateBitMap(){
+  function updateBitMap() {
     console.log('  updateBitMap()');
     
     var binVal = clearFormat($scope.binVal);
@@ -311,7 +314,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     var bitLen = binVal.length;
     
     // console.log('-- binVal: ' + binVal + ' (' + bitLen + ')');
-    if(bitLen % 8 != 0) return;
+    if (bitLen % 8 != 0) return;
     
     var bytes = $("#bytes");
     bytes.empty();
@@ -320,7 +323,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
     var closeWord = false;
     var word;
     
-    for(var i=0; i<bytesLen; ++i){
+    for (var i = 0; i<bytesLen; ++i) {
       var startId = i * 8;
       var endId = startId + 7;
       
@@ -344,15 +347,15 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
       byteInfo.append(byteLowBitNum);
       
       
-      for(var j=0; j<8; ++j){
+      for (var j = 0; j<8; ++j) {
         var bitVal = binVal[startId + j];
 
         var bit = $("<span>");
         bit.addClass("bit unselectable");
         bit.text(bitVal);
-        bit.click(function(){updateBits(this);});
+        bit.click(function() {updateBits(this);});
         
-        if(j < 4)
+        if (j < 4)
           highHalfByte.append(bit);
         else
           lowHalfByte.append(bit);
@@ -365,9 +368,9 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
       byteWrap.append(byte);
       // bytes.append(byteWrap);        // to disable bytes grouping in words uncomment the line and comment the block below
       
-      if(!closeWord){
+      if (!closeWord) {
         word = $("<div>").addClass("word");
-        if(gFullScreen){
+        if (gFullScreen) {
           word.css('display', 'inline-block');
         }
         
@@ -376,7 +379,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
         
         closeWord = true;
       }
-      else{
+      else {
         byte.addClass("low-byte");
         word.append(byteWrap);
         bytes.append(word);
@@ -384,7 +387,7 @@ angular.module('NumberConverter').controller('MainCtrl', function($scope) {
         closeWord = false;
       }
       
-      if(closeWord && i == bytesLen-1){
+      if (closeWord && i == bytesLen-1) {
         bytes.append(word);
       }
     }

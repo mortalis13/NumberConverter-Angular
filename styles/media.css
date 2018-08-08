@@ -1,10 +1,10 @@
 
 @media screen and (max-width: 1350px) {
   .left-side,
-  .right-side{
+  .right-side {
     width: auto;
   }
-  .right-side{
+  .right-side {
     margin-left: 20px;
   }
   .main-content {
@@ -14,13 +14,13 @@
 }
 
 @media screen and (max-width: 992px) {
-  .left-side{
+  .left-side {
     display: none;
   }
 }
 
 @media screen and (max-width: 850px) {
-  .right-side{
+  .right-side {
     display: none;
   }
   .main-content {
@@ -36,7 +36,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .app-container{
+  .app-container {
     width: 90%;
   }
   .main-content {
@@ -59,7 +59,7 @@
     margin-bottom: 10px;
   }
   
-  .options .full-screen-opt{
+  .options .full-screen-opt {
     display: none;
   }
 }
