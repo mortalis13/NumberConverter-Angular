@@ -6,7 +6,7 @@ It's written using the [AngularJS](http://angularjs.org) framework.
 
 ## Run
 
-- check the online page: [**Number Converter**](https://github.com/mortalis13/NumberConverter-AngularJS)
+- check the online page: [**Number Converter**](https://mortalis13.github.io/NumberConverter-AngularJS/index.html)
 - or download this repository and open the **index.html** in a browser
 
 ## Usage
