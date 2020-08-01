@@ -1,31 +1,11 @@
 
+/* TODO: Move the left-side and right-side below the main-content 
+   using conditional templates */
+
 @media screen and (max-width: 1350px) {
   .left-side,
   .right-side {
-    width: auto;
-  }
-  .right-side {
-    margin-left: 20px;
-  }
-  .main-content {
-    float: left;
-    margin-left: 20px;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .left-side {
     display: none;
-  }
-}
-
-@media screen and (max-width: 850px) {
-  .right-side {
-    display: none;
-  }
-  .main-content {
-    float: none;
-    margin-left: 0;
   }
 }
 
