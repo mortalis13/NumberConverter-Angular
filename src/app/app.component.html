@@ -1,0 +1,83 @@
+<div class="app-container" [class.full_screen]="fullScreen">
+    
+  <div class="left-side">
+    <table id="numbers-hint">
+      <tr class="row header">
+        <td class="col dec-header">Dec</td>
+        <td class="col hex-header">Hex</td>
+        <td class="col bin-header">Bin</td>
+      </tr>
+      
+      <tr class="row num-value" *ngFor="let hintNumber of hintNumbers">
+        <td class="col dec-col">{{hintNumber.decVal}}</td>
+        <td class="col hex-col">{{hintNumber.hexVal}}</td>
+        <td class="col bin-col">{{hintNumber.binVal}}</td>
+      </tr>
+    </table>
+  </div>
+  
+  
+  <div class="main-content">
+    <h3 class="app-title text-center">Number Converter</h3>
+    
+    <div class="val-form control-elements form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-xs-1" for="decInput">Dec</label>
+        <input [(ngModel)]="decVal" (input)="decChange()" (focus)="inputFocused($event)" [pattern]="DECIMAL_VALUE_RX" decimal-value type="text" autofocus class="val-control col-xs-9" id="decInput">
+        <button (click)="decCopy()" class="btn btn-copy col-xs-2" id="decCopy" tabindex="-1">COPY</button>
+      </div>
+      
+      <div class="form-group">
+        <label class="control-label col-xs-1" for="hexInput">Hex</label>
+        <input [(ngModel)]="hexVal" (input)="hexChange()" (focus)="inputFocused($event)" [pattern]="HEXADECIMAL_VALUE_RX" hexadecimal-value type="text" class="val-control col-xs-9" id="hexInput">
+        <button (click)="hexCopy()" class="btn btn-copy col-xs-2" id="hexCopy" tabindex="-1">COPY</button>
+      </div>
+      
+      <div class="form-group">
+        <label class="control-label col-xs-1" for="binInput">Bin</label>
+        <input [(ngModel)]="binVal" (input)="binChange()" (focus)="inputFocused($event)" [pattern]="BINARY_VALUE_RX" binary-value type="text" class="val-control col-xs-9" id="binInput">
+        <button (click)="binCopy()" class="btn btn-copy col-xs-2" id="binCopy" tabindex="-1">COPY</button>
+      </div>
+      
+      <div class="form-group">
+        <div class="controls col-xs-12 text-center">
+          <button class="btn btn-default btn-global" id="buttonClear" (click)="clearInputs()">Clear</button>
+          <button (click)="copyAll()" class="btn btn-default btn-global" id="buttonCopyAll">Copy All</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="options">
+      <div class="option format-opt">
+        <input [(ngModel)]="format" (change)="formatChange()" type="checkbox" name="format" id="chFormat">
+        <label class="control-label unselectable" for="chFormat">Format</label>
+      </div>
+      <div class="option full-screen-opt">
+        <input [(ngModel)]="fullScreen" (change)="fullScreenChange()" type="checkbox" name="fullScreen" id="chFullScreen">
+        <label class="control-label unselectable" for="chFullScreen">Full Screen</label>
+      </div>
+    </div>
+    
+    <bitmap [bytes]="bytes" (bitClicked)="bitmapChanged($event)"></bitmap>
+  </div>
+  
+  
+  <div class="right-side">
+    <table id="powers-hint">
+      <tr class="row header">
+        <td class="col dec-header">2<sup>n</sup></td>
+        <td class="col hex-header">Dec</td>
+        <td class="col hex-header">Hex</td>
+        <td class="col bin-header">Bin</td>
+      </tr>
+      
+      <tr class="row num-value" *ngFor="let hintNumber of powerHintNumbers" (click)="fillPowerField(hintNumber)">
+        <td class="col power-col" [innerHTML]="hintNumber.powerExpr"></td>
+        <td class="col power-dec-col">{{hintNumber.powerDecVal}}</td>
+        <td class="col power-hex-col">{{hintNumber.powerHexVal}}</td>
+        <td class="col power-bin-col">{{hintNumber.powerBinVal}}</td>
+      </tr>
+    </table>
+  </div>
+
+</div>

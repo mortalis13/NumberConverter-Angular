@@ -37,6 +37,7 @@ body {
 .val-form .control-label {
   width: 60px;
   text-align: left;
+  padding-left: 6px;
 }
 .val-form .form-group {
   margin-right: 0;
@@ -109,6 +110,9 @@ body {
 }
 .options .option input {
   vertical-align: top;
+}
+.options .control-label {
+  padding-left: 4px;
 }
 
 
@@ -270,4 +274,23 @@ body {
 }
 #numbers-hint .bin-header {
   background: #8cc9da;
+}
+
+
+/* ----- FullScreen ----- */
+.full_screen.app-container {
+  width: 95%;
+}
+.full_screen .main-content {
+  width: 100%;
+}
+.full_screen .left-side,
+.full_screen .right-side {
+  display: none;
+}
+.full_screen .val-form .val-control {
+  width: 90%;
+}
+.full_screen .word_sep {
+  display: none;
 }

@@ -1,13 +1,8 @@
 
 # Number Converter
 
-A simple portable offline application to convert numbers in decimal/hexadecimal/binary format.  
-It's written using the [AngularJS](http://angularjs.org) framework.
-
-## Run
-
-- check the online page: [**Number Converter**](https://mortalis13.github.io/NumberConverter-AngularJS/index.html)
-- or download this repository and open the **index.html** in a browser
+Convert numbers in decimal/hexadecimal/binary format.  
+It's written using the [Angular](http://angular.io) framework.
 
 ## Usage
 

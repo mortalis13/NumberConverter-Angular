@@ -1,0 +1,31 @@
+<div id="bits-map">
+  <div id="bytes">
+    
+    <ng-template ngFor let-byte [ngForOf]="bytes" let-i="index" let-index_even="even">
+    <div class="byte-wrap">
+      <div class="byte-info">
+        <div class="high-bit-num">{{byte.highBit}}</div>
+        <div class="byte-num">byte {{byte.num}}</div>
+        <div class="low-bit-num">{{byte.lowBit}}</div>
+      </div>
+      <!-- <div class="byte" [class.high-byte]="index_even" [class.low-byte]="!index_even" (click)="byteClick($event)"> -->
+      <div [ngClass]="{'byte': true, 'high-byte': index_even, 'low-byte': !index_even}" (click)="byteClick($event, byte)">
+        <div class="high-half-byte">
+          <span class="bit unselectable" data-bit=7>{{byte.bits[0]}}</span>
+          <span class="bit unselectable" data-bit=6>{{byte.bits[1]}}</span>
+          <span class="bit unselectable" data-bit=5>{{byte.bits[2]}}</span>
+          <span class="bit unselectable" data-bit=4>{{byte.bits[3]}}</span>
+        </div>
+        <div class="low-half-byte">
+          <span class="bit unselectable" data-bit=3>{{byte.bits[4]}}</span>
+          <span class="bit unselectable" data-bit=2>{{byte.bits[5]}}</span>
+          <span class="bit unselectable" data-bit=1>{{byte.bits[6]}}</span>
+          <span class="bit unselectable" data-bit=0>{{byte.bits[7]}}</span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!index_even" class="word_sep"></div>
+    </ng-template>
+
+  </div>
+</div>
