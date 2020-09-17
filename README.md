@@ -1,8 +1,15 @@
 
 # Number Converter
 
-Convert numbers in decimal/hexadecimal/binary format.  
-It's written using the [Angular](http://angular.io) framework.
+Converts numbers between decimal, hexadecimal and binary formats.  
+Created with the [Angular](http://angular.io) framework.
+
+The initial version of the project used the [AngularJS](https://angularjs.org) framework and can be found in the [**angular-js**](https://github.com/mortalis13/NumberConverter-Angular/tree/angular-js) branch.
+
+## Run
+
+- check the online page: [**Number Converter**](https://mortalis13.github.io/NumberConverter-Angular)
+- or download this repository and open the **docs/index.html** in a browser
 
 ## Usage
 
