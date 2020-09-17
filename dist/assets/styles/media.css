@@ -1,0 +1,45 @@
+
+/* TODO: Move the left-side and right-side below the main-content 
+   using conditional templates */
+
+@media screen and (max-width: 1350px) {
+  .left-side,
+  .right-side {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form-horizontal .control-label {
+    padding-top: 7px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .app-container {
+    width: 90%;
+  }
+  .main-content {
+    width: 100%;
+  }
+  .val-form .control-label {
+    display: block;
+    float: none;
+    padding: 0;
+  }
+  .val-form .val-control {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+  .val-form .btn-copy {
+    display: none;
+  }
+  .val-form .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .options .full-screen-opt {
+    display: none;
+  }
+}
